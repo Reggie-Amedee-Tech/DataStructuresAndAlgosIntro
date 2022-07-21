@@ -10,12 +10,28 @@ class Stack {
     remove() {
         return this._array.pop()
     }
+
+    peek() {
+        return this._array[this._array.length - 1]
+    }
+
+    isEmpty() {
+        return this._array.length === 0
+    }
+
+    size() {
+        return this._array.length
+    }
+
+    print() {
+        console.log(this._array.toString())
+    }
 }
 
 const wholeBunchaStackin = new Stack()
 wholeBunchaStackin.addData('60 CRIP NIGGA')
 wholeBunchaStackin.addData('BIG WHOOPTY')
 wholeBunchaStackin.addData('THEY THOUGHT THEY HAD ONE')
-wholeBunchaStackin.remove();
 
-console.log(wholeBunchaStackin)
+wholeBunchaStackin.peek()
+wholeBunchaStackin.print()
