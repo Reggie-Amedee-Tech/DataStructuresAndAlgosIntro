@@ -14,6 +14,14 @@ class LinkedList {
         }
     }
 
+    isEmpty() {
+        return this.size === 0;
+    }
+
+    getSize() {
+        return this.size
+    }
+
     addToTail(data) {
         // you have to first assign a head to the initial tail
         let tail = this.head
