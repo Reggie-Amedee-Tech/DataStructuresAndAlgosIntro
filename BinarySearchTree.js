@@ -72,6 +72,65 @@ class BinarySearchTree {
             console.log(root.data)
         }
     }
+
+    levelOrder() {
+        // higher time complexity
+        const queue = []
+        queue.push(this.root)
+        while(queue.length) {
+            let curr = queue.shift()
+            console.log(curr.data)
+            if(curr.left) {
+                queue.push(curr.left)
+            } 
+            if(curr.right) {
+                queue.push(curr.right)
+            }
+        }
+    }
+
+    min(root) {
+        if(!root.left) {
+            return root.data
+        } else {
+            return this.min(root.left)
+        }
+    }
+
+    max(root) {
+        if (!root.right) {
+            return root.data
+        } else {
+            return this.max(root.right)
+        }
+    }
+
+    delete(data) {
+        this.root = this.deleteNode(this.root, data)
+    }
+
+    deleteNode(root, data) {
+        if (root === null) {
+            return root
+        }
+        if(data < root.data) {
+            root.left = this.deleteNode(root.left, data)
+        } else if (data > root.data) {
+            root.right = this.deleteNode(root.right, data)
+        } else {
+            if(!root.left && !root.right) {
+                return null
+            }
+            if(!root.left) {
+                return root.right
+            } else if (!root.right) {
+                return root.left
+            }
+            root.data = this.min(root.right)
+            root.right = this.deleteNode(root.right, data)
+        }
+        return root
+    }
 }
 
 const searchTree = new BinarySearchTree(Node)
@@ -79,12 +138,10 @@ searchTree.insert(10)
 searchTree.insert(5)
 searchTree.insert(15)
 searchTree.insert(3)
-searchTree.insert(7)
 
-console.log(searchTree.isEmpty())
-console.log(searchTree.search(searchTree.root, 10))
-console.log(searchTree.search(searchTree.root, 5))
-console.log(searchTree.search(searchTree.root, 15))
-console.log(searchTree.search(searchTree.root, 40))
 
-searchTree.postOrder(searchTree.root)
+
+searchTree.delete(10)
+searchTree.levelOrder(searchTree.root)
+
+console.log(searchTree.min(searchTree.root))
